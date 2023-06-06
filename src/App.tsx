@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Register from './pages/Register';
+import AdminPanel from './pages/AdminPanel';
+import LogOut from './pages/LogOut';
+import AdminPanelMain from './pages/AdminPanelMain';
+import AdminPanelTask from './pages/AdminPanelTask';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <BrowserRouter>
+                <Nav />
+                <Routes>
+                    <Route path='/' Component={Home} />
+                    <Route path='/login' Component={Login} />
+                    <Route path='/register' Component={Register} />
+                    <Route path='/adminPanel' Component={AdminPanel} >
+                        <Route path='/adminPanel/' Component={AdminPanelMain} />
+                        <Route path='/adminPanel/AdminPanelTask' Component={AdminPanelTask} />
+                    </Route>
+                    <Route path='*' element={"nopage"} />
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
 }
 
 export default App;
